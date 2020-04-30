@@ -1,27 +1,33 @@
 import { h } from "preact";
 import { useState } from "preact/hooks";
 import style from "./style";
-import firebase from "firebase/app";
-import "firebase/firestore";
-
-const db = firebase.firestore();
+import { apiClient } from "../../apiClient";
 
 const search = (searchStr, setSiteArr) => {
-  db.collection("sites")
-    .where("name", ">=", searchStr)
-    .get()
-    .then(function (querySnapshot) {
-      var arrayOfSites = [];
-      querySnapshot.forEach(function (doc) {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-        arrayOfSites.push(doc.data());
-      });
-      setSiteArr(arrayOfSites);
+  apiClient
+    .get("/sites", {
+      params: {
+        searchStr,
+      },
     })
-    .catch(function (error) {
-      console.log("Error getting documents: ", error);
+    .then((res) => {
+      console.log("RES", res);
     });
+  // db.collection("sites")
+  //   .where("name", ">=", searchStr)
+  //   .get()
+  //   .then(function (querySnapshot) {
+  //     var arrayOfSites = [];
+  //     querySnapshot.forEach(function (doc) {
+  //       // doc.data() is never undefined for query doc snapshots
+  //       console.log(doc.id, " => ", doc.data());
+  //       arrayOfSites.push(doc.data());
+  //     });
+  //     setSiteArr(arrayOfSites);
+  //   })
+  //   .catch(function (error) {
+  //     console.log("Error getting documents: ", error);
+  //   });
 };
 
 const Home = () => {

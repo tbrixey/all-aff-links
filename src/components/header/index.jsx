@@ -6,8 +6,12 @@ const Header = () => (
   <header class={style.header}>
     <h1>All Affiliate Links</h1>
     <nav>
-      <Link href="/">Home</Link>
-      <Link href="/submit">Submit</Link>
+      <Link activeClassName={style.active} href="/">
+        Home
+      </Link>
+      <Link activeClassName={style.active} href="/submit">
+        Submit
+      </Link>
     </nav>
   </header>
 );

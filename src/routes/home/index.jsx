@@ -2,7 +2,12 @@ import { h } from "preact";
 import { useState } from "preact/hooks";
 import style from "./style";
 import { apiClient } from "../../apiClient";
-import { TextField, Button, CircularProgress } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  CircularProgress,
+  Typography,
+} from "@material-ui/core";
 import Site from "./Site";
 
 const search = (searchStr, setSiteArr, setError, setLoading) => {
@@ -31,7 +36,11 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   return (
     <div class={style.home}>
-      <h1>Search for a site</h1>
+      <Typography variant="h6">Save money. Get free stuff.</Typography>
+      <Typography variant="h6">Make someone else money. 🤑</Typography>
+      <div style={{ marginTop: 24 }}>
+        <Typography variant="h4">Search for a site</Typography>
+      </div>
       <div class={style.searchRow}>
         <TextField
           placeholder={"example.com"}

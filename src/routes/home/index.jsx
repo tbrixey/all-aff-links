@@ -2,47 +2,54 @@ import { h } from "preact";
 import { useState } from "preact/hooks";
 import style from "./style";
 import { apiClient } from "../../apiClient";
+import { TextField, Button, CircularProgress } from "@material-ui/core";
+import Site from "./Site";
 
-const search = (searchStr, setSiteArr) => {
-  apiClient
-    .get("/sites", {
-      params: {
-        searchStr,
-      },
-    })
-    .then((res) => {
-      console.log("RES", res);
-    });
-  // db.collection("sites")
-  //   .where("name", ">=", searchStr)
-  //   .get()
-  //   .then(function (querySnapshot) {
-  //     var arrayOfSites = [];
-  //     querySnapshot.forEach(function (doc) {
-  //       // doc.data() is never undefined for query doc snapshots
-  //       console.log(doc.id, " => ", doc.data());
-  //       arrayOfSites.push(doc.data());
-  //     });
-  //     setSiteArr(arrayOfSites);
-  //   })
-  //   .catch(function (error) {
-  //     console.log("Error getting documents: ", error);
-  //   });
+const search = (searchStr, setSiteArr, setError, setLoading) => {
+  if (searchStr) {
+    setLoading(true);
+    apiClient
+      .get("/sites", {
+        params: {
+          searchStr,
+        },
+      })
+      .then((res) => {
+        setSiteArr(res.data);
+        setError(false);
+        setLoading(false);
+      });
+  } else {
+    setError(true);
+  }
 };
 
 const Home = () => {
   const [site, changeSite] = useState("");
   const [sitesArr, setSiteArr] = useState([]);
+  const [textError, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   return (
     <div class={style.home}>
       <h1>Search for a site</h1>
-      <div>
-        <input value={site} onChange={(e) => changeSite(e.target.value)} />
-        <button onClick={() => search(site, setSiteArr)}>Search</button>
+      <div class={style.searchRow}>
+        <TextField
+          placeholder={"example.com"}
+          value={site}
+          onChange={(e) => changeSite(e.target.value)}
+          error={textError}
+          disabled={loading}
+        />
+        <Button
+          variant={"outlined"}
+          onClick={() => search(site, setSiteArr, setError, setLoading)}
+          style={{ marginLeft: 8, width: 86 }}
+          disabled={loading}
+        >
+          {loading ? <CircularProgress size={24} /> : "Search"}
+        </Button>
       </div>
-      {sitesArr.map((site, idx) => (
-        <div key={idx}>{site.url}</div>
-      ))}
+      <Site sitesArr={sitesArr} />
     </div>
   );
 };

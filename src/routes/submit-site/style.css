@@ -1,14 +1,8 @@
-.home {
+.container {
   min-height: 50%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.searchRow {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

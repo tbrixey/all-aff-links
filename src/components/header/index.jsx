@@ -7,6 +7,7 @@ const Header = () => (
     <h1>All Affiliate Links</h1>
     <nav>
       <Link href="/">Home</Link>
+      <Link href="/submit">Submit</Link>
     </nav>
   </header>
 );

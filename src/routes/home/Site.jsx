@@ -1,19 +1,18 @@
 import { h } from "preact";
 import { useState } from "preact/hooks";
-import style from "./SiteStyle";
 import { Typography, Link } from "@material-ui/core";
 
-const Site = ({ sitesArr }) => {
+const Site = ({ siteResult }) => {
   return (
-    <div class={style.siteContainer}>
-      {sitesArr.map((site, idx) => (
-        <Typography key={idx}>
-          <Link target="_blank" rel="noopener" href={site.url}>
-            {site.name}
+    <>
+      {siteResult && (
+        <Typography>
+          <Link target="_blank" rel="noopener" href={siteResult.url}>
+            {siteResult.name}
           </Link>
         </Typography>
-      ))}
-    </div>
+      )}
+    </>
   );
 };
 

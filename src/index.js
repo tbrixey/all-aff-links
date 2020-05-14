@@ -1,6 +1,7 @@
 import "./style";
 import App from "./components/app";
 import firebase from "firebase/app";
+import "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDfCqfQ7rsaF9pQnHTyCZhLf8MU9TjdD7M",
@@ -14,5 +15,7 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+firebase.analytics();
 
 export default App;

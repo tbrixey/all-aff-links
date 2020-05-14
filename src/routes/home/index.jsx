@@ -38,9 +38,7 @@ const Home = () => {
     <div class={style.home}>
       <Typography variant="h6">Save money. Get free stuff.</Typography>
       <Typography variant="h6">Make someone else money. 🤑</Typography>
-      <div style={{ marginTop: 24 }}>
-        <Typography variant="h3">Search for a site</Typography>
-      </div>
+      <Typography variant="h3">Search for a site</Typography>
       <div class={style.searchRow}>
         <TextField
           placeholder={"example.com"}

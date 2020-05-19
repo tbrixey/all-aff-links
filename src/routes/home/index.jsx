@@ -34,6 +34,15 @@ const Home = () => {
   const [siteResult, setSiteResult] = useState();
   const [textError, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const doesNotWork = () => {
+    apiClient
+      .post("/siteexpired", {
+        site: siteResult,
+      })
+      .then((res) => {});
+  };
+
   return (
     <div class={style.home}>
       <Typography variant="h6">Save money. Get free stuff.</Typography>
@@ -62,7 +71,7 @@ const Home = () => {
         </Button>
       </div>
       <div style={{ height: 40 }}>
-        <Site siteResult={siteResult} />
+        <Site siteResult={siteResult} doesNotWork={doesNotWork} />
       </div>
     </div>
   );
